@@ -1,31 +1,33 @@
 ﻿{
-  "ReRoutes": [
+  "Routes": [
     {
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44339
+          "Port": 5063
         }
       ],
       "UpstreamPathTemplate": "/api1/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44377
+          "Port": 5039
         }
       ],
       "UpstreamPathTemplate": "/api2/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
-
   "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5263"
   }
 }
