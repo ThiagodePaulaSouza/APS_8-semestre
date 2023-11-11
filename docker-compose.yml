@@ -1,0 +1,118 @@
+version: '3.4'
+services:
+  db:
+    image: postgres
+    restart: always
+    user: root # para windows - https://stackoverflow.com/a/71816543
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGUSER: ${POSTGRES_USER}
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    volumes:
+      - db:/var/lib/postgresql/data
+      # - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 15433:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${POSTGRES_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - postgres-network
+    volumes:
+      - ./pgadmin-data/:/var/lib/pgadmin/
+  cache:
+    image: redis
+    container_name: cache
+    restart: always
+    ports:
+      - '6379:6379'
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass ${REDIS_PASSWORD}
+      # - redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/var/lib/redis/data
+      # - ./redis.conf:/usr/local/etc/redis/redis.conf
+
+      # buscar-reciclaveis-api:
+      #   image: buscarreciclaveisapi
+      #   container_name: buscar-reciclaveis-api
+      #   hostname: buscar.reciclaveis.api
+      #   build:
+      #     context: ./backend/BuscarReciclaveis/BuscarReciclaveis
+      #   ports:
+      #     - "5100:3000"
+      #   environment:
+      #     "PUBLIC_PORT": "5100"
+      #   depends_on:
+      #     cache:
+      #       condition: service_started
+
+      # buscar-locais-descarte-api:
+      #   image: buscarlocaisdescarteapi
+      #   container_name: buscar-locais-descarte-api
+      #   hostname: buscar.locais.descarte.api
+      #   build:
+      #     context: ./backend/BuscarLocaisDescarte/BuscarLocaisDescarte
+      #   ports:
+      #     - "5110:3000"
+      #   environment:
+      #     "PUBLIC_PORT": "5110"
+      #   depends_on:
+      #     cache:
+      #       condition: service_started
+
+      # relatorios-api:
+      #   image: bookloanloanapi
+      #   container_name: relatorios-api
+      #   hostname: relatorios.api
+      #   build:
+      #     context: ./backend/Relatorios/Relatorios
+      #   ports:
+      #     - "5120:3000"
+      #   environment:
+      #     "PUBLIC_PORT": "5120"
+      #   depends_on:
+      #     db:
+      #       condition: service_healthy
+      #     cache:
+      #       condition: service_started
+
+      # gateway-api:
+      #   image: gatewayapi
+      #   container_name: gateway-api
+      #   hostname: gateway.api
+      #   build:
+      #     context: ./backend/Gateway/Gateway
+      #   ports:
+      #     - "5263:80"
+      #   links:
+      #     - buscar.reciclaveis.api
+      #     - buscar.locais.descarte.api
+      #     - relatorios.api
+      #   depends_on:
+      #     - buscar.reciclaveis.api
+      #     - buscar.locais.descarte.api
+      #     - relatorios.api
+
+networks:
+  postgres-network:
+    driver: bridge
+volumes:
+  db:
+  cache:
