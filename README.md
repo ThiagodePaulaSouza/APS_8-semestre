@@ -23,3 +23,6 @@
 - busca de locais para descarte
 
 ![Arquitetura da Aps](arquitetura.png)
+
+## Contribuir
+Alterar o .env.example para .env `cp .env.example .env`
