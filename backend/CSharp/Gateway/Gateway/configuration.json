@@ -3,28 +3,42 @@
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
+      "Priority": 5,
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5063
+          "Port": 5100
         }
       ],
       "UpstreamPathTemplate": "/api1/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamHttpVersion": "1.0",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
       "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
+      "Priority": 5,
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5039
+          "Port": 5110
         }
       ],
       "UpstreamPathTemplate": "/api2/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-    "DangerousAcceptAnyServerCertificateValidator": true
+      "DownstreamHttpVersion": "1.0",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
   "GlobalConfiguration": {

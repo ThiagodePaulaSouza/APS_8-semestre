@@ -5,10 +5,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Gateway/Gateway.csproj", "Gateway/"]
-RUN dotnet restore "Gateway/Gateway.csproj"
+COPY Gateway.csproj .
+RUN dotnet restore "Gateway.csproj"
 COPY . .
-WORKDIR "/src/Gateway"
 RUN dotnet build "Gateway.csproj" -c Release -o /app/build
 
 FROM build AS publish

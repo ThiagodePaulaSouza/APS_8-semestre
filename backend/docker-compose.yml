@@ -1,0 +1,51 @@
+services:
+  buscar-reciclaveis-api:
+    container_name: buscar-reciclaveis-api
+    hostname: buscar.reciclaveis.api
+    build:
+      context: CSharp/api1/api1
+    ports:
+      - "5100:70"
+    networks:
+      - aps8
+    environment:
+      "PUBLIC_PORT": "5100"
+    # depends_on:
+    #   cache:
+    #     condition: service_started
+
+  buscar-locais-descarte-api:
+    container_name: buscar-locais-descarte-api
+    hostname: buscar.locais.descarte.api
+    build:
+      context: CSharp/API2/API2
+    ports:
+      - "5110:5110"
+    networks:
+      - aps8
+    environment:
+      "PUBLIC_PORT": "5110"
+    # depends_on:
+    #   cache:
+    #     condition: service_started
+
+  gateway-api:
+    container_name: gateway-api
+    hostname: gateway.api
+    build:
+      context: CSharp/Gateway/Gateway
+    ports:
+      - "5263:80"
+    networks:
+      - aps8
+    environment:
+      "PUBLIC_PORT": "5263"
+    depends_on:
+      buscar-reciclaveis-api:
+        condition: service_started
+      buscar-locais-descarte-api:
+        condition: service_started
+      # - relatorios.api
+
+networks:
+  aps8:

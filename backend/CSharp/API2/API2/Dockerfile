@@ -1,14 +1,13 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5110
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["API2/API2.csproj", "API2/"]
-RUN dotnet restore "API2/API2.csproj"
+COPY API2.csproj .
+RUN dotnet restore "API2.csproj"
 COPY . .
-WORKDIR "/src/API2"
 RUN dotnet build "API2.csproj" -c Release -o /app/build
 
 FROM build AS publish

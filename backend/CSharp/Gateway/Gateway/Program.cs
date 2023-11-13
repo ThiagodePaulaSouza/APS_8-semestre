@@ -18,10 +18,11 @@ public class Program
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                     .AddJsonFile($"appsettings.{host.HostingEnvironment.EnvironmentName}.json", optional: true,
                         reloadOnChange: true)
-                    .AddJsonFile($"configuration.{host.HostingEnvironment.EnvironmentName}.json")
+                    .AddJsonFile($"configuration.json"/*, optional: true, reloadOnChange: true */)
                     .AddEnvironmentVariables();
             })
-            .ConfigureServices(s => {
+            .ConfigureServices(s =>
+            {
                 s.AddOcelot();
             })
             // .ConfigureLogging((hostingContext, logging) =>
