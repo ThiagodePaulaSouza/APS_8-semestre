@@ -1,6 +1,5 @@
 using BuscarReciclaveis.Api.Configurations;
 using BuscarReciclaveis.Configurations;
-using Hangfire;
 
 namespace BuscarReciclaveis
 {

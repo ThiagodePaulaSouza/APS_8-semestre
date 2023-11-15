@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BuscarReciclaveis.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231115051041_PrimeiroMigration")]
+    [Migration("20231115163112_PrimeiroMigration")]
     partial class PrimeiroMigration
     {
         /// <inheritdoc />
