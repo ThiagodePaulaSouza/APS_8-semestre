@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API2", "API2\API2\API2.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Gateway\Gateway\Gateway.csproj", "{B3BF911A-D2B3-4443-9262-EF6E58199C04}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuscarReciclaveis", "BuscarReciclaveis\BuscarReciclaveis.csproj", "{BFC0E833-9254-4436-B930-F638C7745E1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B3BF911A-D2B3-4443-9262-EF6E58199C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3BF911A-D2B3-4443-9262-EF6E58199C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3BF911A-D2B3-4443-9262-EF6E58199C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC0E833-9254-4436-B930-F638C7745E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC0E833-9254-4436-B930-F638C7745E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC0E833-9254-4436-B930-F638C7745E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC0E833-9254-4436-B930-F638C7745E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
