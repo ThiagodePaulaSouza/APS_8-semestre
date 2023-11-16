@@ -31,7 +31,7 @@ namespace BuscarReciclaveis.Api.Controllers
             }
             
             IList<ItemResponse> result = itemsReciclaveis
-                .Select(i => new ItemResponse { TextoItem = i.TextoItem, IdCategoriaReciclavel = i.CategoriaReciclavel.IdCategoria })
+                .Select(i => new ItemResponse(i.CategoriaReciclavel.IdCategoria, i.TextoItem))
                 .ToList();
 
             return Ok(result);
@@ -48,7 +48,7 @@ namespace BuscarReciclaveis.Api.Controllers
             foreach (var item in request)
             {
                 var categoria = await _unitOfWork.ICategoriaReciclavel.SelectByCategoryIdAtivoAsync(item.IdCategoria);
-                items.Add(Factory.New(new ItemCategoriaRequest(categoria, item.TextoItem)));
+                items.Add(Factory.New(new ItemCategoriaRequest(categoria, item.IdCategoria, item.TextoItem)));
             }
             
             IList<string>? mensagemErro = null;
@@ -85,7 +85,7 @@ namespace BuscarReciclaveis.Api.Controllers
             }
 
             CategoriaReciclavel categoria = await _unitOfWork.ICategoriaReciclavel.SelectByCategoryIdAtivoAsync(request.IdCategoria);
-            var result = new ItemCategoriaRequest(categoria, request.TextoItem);
+            var result = new ItemCategoriaRequest(categoria, request.IdCategoria, request.TextoItem);
 
             item.Update(result);
 

@@ -18,6 +18,7 @@ namespace BuscarReciclaveis.Domain.Entidades
         {
             TextoItem = request.TextoItem;
             Status = Enums.Status.Ativo;
+            IdCategoria = request.IdCategoria;
             CategoriaReciclavel = request.CategoriaReciclavel;
         }
 
@@ -48,6 +49,7 @@ namespace BuscarReciclaveis.Domain.Entidades
                 {
                     Status = Enums.Status.Ativo,
                     TextoItem = request.TextoItem,
+                    IdCategoria = request.IdCategoria,
                     CategoriaReciclavel = request.CategoriaReciclavel
                 };
                 return item;

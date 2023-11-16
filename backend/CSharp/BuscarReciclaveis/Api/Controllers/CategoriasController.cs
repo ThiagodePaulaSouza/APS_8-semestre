@@ -32,7 +32,7 @@ namespace BuscarReciclaveis.Api.Controllers
             }
             
             IList<CategoriaResponse> result = categoriasReciclaveis
-                .Select(i => new CategoriaResponse { IdCategoria = i.IdCategoria, TextoCategoria = i.TextoCategoria })
+                .Select(i => new CategoriaResponse(i.IdCategoria, i.TextoCategoria))
                 .ToList();
 
             return Ok(result);

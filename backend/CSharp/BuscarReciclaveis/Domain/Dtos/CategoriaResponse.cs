@@ -1,8 +1,6 @@
 ﻿namespace BuscarReciclaveis.Domain.Dtos
 {
-    public class CategoriaResponse
+    public record CategoriaResponse (int IdCategoria, string TextoCategoria)
     {
-        public int IdCategoria { get; set; }
-        public required string TextoCategoria { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BuscarReciclaveis.Domain.Dtos
 {
-    public record ItemCategoriaRequest (CategoriaReciclavel CategoriaReciclavel, string TextoItem)
+    public record ItemCategoriaRequest (CategoriaReciclavel CategoriaReciclavel, int IdCategoria, string TextoItem)
     {
     }
 }
