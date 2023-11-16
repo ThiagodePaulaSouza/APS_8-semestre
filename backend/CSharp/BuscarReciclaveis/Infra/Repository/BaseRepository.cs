@@ -1,3 +1,4 @@
+using BuscarReciclaveis.Domain.Enums;
 using BuscarReciclaveis.Domain.Interfaces.Repository;
 using BuscarReciclaveis.Infra.Database;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,15 @@ namespace BuscarReciclaveis.Infra.Repository
             this.DbSet = this._context.Set<T>();
         }
 
-        public virtual void Add(T entity)
+        public virtual async Task AddAsync(T entity)
         {
-            this.DbSet.Add(entity);
+            await this.DbSet.AddAsync(entity);
+            _context.SaveChanges();
+        }
+        
+        public virtual async Task AddManyAsync(IList<T> entity)
+        {
+            await this.DbSet.AddRangeAsync(entity);
             _context.SaveChanges();
         }
 
@@ -26,9 +33,21 @@ namespace BuscarReciclaveis.Infra.Repository
             _context.SaveChanges();
         }
 
+        public virtual async Task Remove(int id)
+        {
+            this.DbSet.Remove(await SelectByIdAsync(id));
+            _context.SaveChanges();
+        }
+
+        public virtual async Task<T> SelectByIdAsync(int id)
+        {
+            return await this.DbSet.FindAsync(id);
+        }
+
         public virtual void SaveChanges()
         {
             _context.SaveChanges();
         }
+        
     }
 }

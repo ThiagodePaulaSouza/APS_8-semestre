@@ -4,8 +4,8 @@ namespace BuscarReciclaveis.Domain.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IItemsReciclaveisRepository IItemsReciclaveisRepository { get; }
-        ICategoriasReciclaveisRepository ICategoriasReciclaveis { get; }
+        IItemRepository IItemReciclavelRepository { get; }
+        ICategoriaRepository ICategoriaReciclavel { get; }
 
         Task Commit();
     }

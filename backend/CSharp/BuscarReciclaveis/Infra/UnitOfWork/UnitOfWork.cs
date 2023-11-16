@@ -13,11 +13,11 @@ namespace BuscarReciclaveis.Infra.UnitOfWork
             _dbContext = dbContext;
         }
 
-        public ICategoriasReciclaveisRepository _categoriasRepository { get; set; }
-        public ICategoriasReciclaveisRepository ICategoriasReciclaveis => _categoriasRepository ??= new CategoriasReciclaveisRepository(_dbContext);
+        public ICategoriaRepository _categoriaRepository { get; set; }
+        public ICategoriaRepository ICategoriaReciclavel => _categoriaRepository ??= new CategoriaRepository(_dbContext);
 
-        public IItemsReciclaveisRepository _itemsRepository { get; set; }
-        public IItemsReciclaveisRepository IItemsReciclaveisRepository => _itemsRepository ??= new ItemsReciclaveisRepository(_dbContext);
+        public IItemRepository _itemRepository { get; set; }
+        public IItemRepository IItemReciclavelRepository => _itemRepository ??= new ItemRepository(_dbContext);
 
 
         public async Task Commit()

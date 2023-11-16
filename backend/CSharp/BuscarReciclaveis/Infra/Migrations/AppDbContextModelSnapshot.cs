@@ -22,7 +22,7 @@ namespace BuscarReciclaveis.Infra.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.CategoriasReciclaveis", b =>
+            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.CategoriaReciclavel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,11 +30,23 @@ namespace BuscarReciclaveis.Infra.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CascadeMode")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ClassLevelCascadeMode")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DataAtualizado")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DataCriado")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("IdCategoria")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RuleLevelCascadeMode")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
@@ -45,10 +57,10 @@ namespace BuscarReciclaveis.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoriasReciclaveis");
+                    b.ToTable("CategoriaReciclavel");
                 });
 
-            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.ItemsReciclaveis", b =>
+            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.ItemReciclavel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,13 +68,25 @@ namespace BuscarReciclaveis.Infra.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CascadeMode")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CategoriaReciclavelId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ClassLevelCascadeMode")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DataAtualizado")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DataCriado")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("IdCategoriasReciclaveis")
+                    b.Property<int>("IdCategoria")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RuleLevelCascadeMode")
                         .HasColumnType("integer");
 
                     b.Property<int>("Status")
@@ -74,20 +98,20 @@ namespace BuscarReciclaveis.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategoriasReciclaveis");
+                    b.HasIndex("CategoriaReciclavelId");
 
-                    b.ToTable("ItemsReciclaveis");
+                    b.ToTable("ItemReciclavel");
                 });
 
-            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.ItemsReciclaveis", b =>
+            modelBuilder.Entity("BuscarReciclaveis.Domain.Entidades.ItemReciclavel", b =>
                 {
-                    b.HasOne("BuscarReciclaveis.Domain.Entidades.CategoriasReciclaveis", "CategoriasReciclaveis")
+                    b.HasOne("BuscarReciclaveis.Domain.Entidades.CategoriaReciclavel", "CategoriaReciclavel")
                         .WithMany()
-                        .HasForeignKey("IdCategoriasReciclaveis")
+                        .HasForeignKey("CategoriaReciclavelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CategoriasReciclaveis");
+                    b.Navigation("CategoriaReciclavel");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,8 +9,8 @@ namespace BuscarReciclaveis.Api.Configurations
     {
         public static void AddServicesScopedConfiguration(this IServiceCollection services)
         {
-            services.AddScoped<IItemsReciclaveisRepository, ItemsReciclaveisRepository>();
-            services.AddScoped<ICategoriasReciclaveisRepository, CategoriasReciclaveisRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

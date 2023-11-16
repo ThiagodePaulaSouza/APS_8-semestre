@@ -7,64 +7,72 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BuscarReciclaveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeiroMigration : Migration
+    public partial class Primeiroteste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CategoriasReciclaveis",
+                name: "CategoriaReciclavel",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
                     TextoCategoria = table.Column<string>(type: "text", nullable: false),
+                    CascadeMode = table.Column<int>(type: "integer", nullable: false),
+                    ClassLevelCascadeMode = table.Column<int>(type: "integer", nullable: false),
+                    RuleLevelCascadeMode = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     DataCriado = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DataAtualizado = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoriasReciclaveis", x => x.Id);
+                    table.PrimaryKey("PK_CategoriaReciclavel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemsReciclaveis",
+                name: "ItemReciclavel",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TextoItem = table.Column<string>(type: "text", nullable: false),
-                    IdCategoriasReciclaveis = table.Column<int>(type: "integer", nullable: false),
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
+                    CategoriaReciclavelId = table.Column<int>(type: "integer", nullable: false),
+                    CascadeMode = table.Column<int>(type: "integer", nullable: false),
+                    ClassLevelCascadeMode = table.Column<int>(type: "integer", nullable: false),
+                    RuleLevelCascadeMode = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     DataCriado = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DataAtualizado = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemsReciclaveis", x => x.Id);
+                    table.PrimaryKey("PK_ItemReciclavel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ItemsReciclaveis_CategoriasReciclaveis_IdCategoriasReciclav~",
-                        column: x => x.IdCategoriasReciclaveis,
-                        principalTable: "CategoriasReciclaveis",
+                        name: "FK_ItemReciclavel_CategoriaReciclavel_CategoriaReciclavelId",
+                        column: x => x.CategoriaReciclavelId,
+                        principalTable: "CategoriaReciclavel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemsReciclaveis_IdCategoriasReciclaveis",
-                table: "ItemsReciclaveis",
-                column: "IdCategoriasReciclaveis");
+                name: "IX_ItemReciclavel_CategoriaReciclavelId",
+                table: "ItemReciclavel",
+                column: "CategoriaReciclavelId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ItemsReciclaveis");
+                name: "ItemReciclavel");
 
             migrationBuilder.DropTable(
-                name: "CategoriasReciclaveis");
+                name: "CategoriaReciclavel");
         }
     }
 }

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BuscarReciclaveis.Infra.Repository
 {
-    public class ItemsReciclaveisRepository : BaseRepository<ItemsReciclaveis>, IItemsReciclaveisRepository
+    public class ItemRepository : BaseRepository<ItemReciclavel>, IItemRepository
     {
-        public ItemsReciclaveisRepository(AppDbContext appDbContext) : base(appDbContext){ }
+        public ItemRepository(AppDbContext appDbContext) : base(appDbContext){ }
 
         public void Delete(int Id)
         {
@@ -21,13 +21,23 @@ namespace BuscarReciclaveis.Infra.Repository
                 SaveChanges();
             }
         }
-        public async Task<IList<ItemsReciclaveis>> SelectAllAsync()
+        public async Task<IList<ItemReciclavel>> SelectAllAsync()
         {
-            var query = await _context.Set<ItemsReciclaveis>()
+            var query = await _context.Set<ItemReciclavel>()
                 .Where(x => x.Status == Status.Ativo)
+                .Include(x => x.CategoriaReciclavel)
                 .ToListAsync();
 
             return query;
         }
+
+        public async Task<ItemReciclavel> SelectByIdAtivoAsync(int id)
+        {
+            var query = await _context.Set<ItemReciclavel>()
+                .SingleOrDefaultAsync(x => x.Id == id && x.Status == Status.Ativo);
+
+            return query;
+        }
+
     }
 }
