@@ -9,9 +9,27 @@
           "Port": 5010
         }
       ],
-      "UpstreamPathTemplate": "/reciclaveis/{everything}",
-      "UpstreamHttpMethod": [ "Get" ],
-    "DangerousAcceptAnyServerCertificateValidator": true
+      "UpstreamPathTemplate": "/net/reciclaveis/{everything}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/java/{everything}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
   "GlobalConfiguration": {
